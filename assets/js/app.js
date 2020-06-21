@@ -14,28 +14,15 @@ import "../css/app.scss"
 //     import socket from "./socket"
 //
 import "phoenix_html"
-import * as BABYLON from 'babylonjs'
-import * as hello from './hello'
+import * as gm from "./game"
 
-window.addEventListener('DOMContentLoaded', function () {
-  var canvas = document.getElementById("renderCanvas");
+window.addEventListener('DOMContentLoaded', () => {
+  // Create the game using the 'renderCanvas'.
+  let game = new gm.Game('renderCanvas');
 
-  var engine = null;
-  var scene = null;
-  var sceneToRender = null;
-  var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
-  engine = createDefaultEngine();
-  scene = hello.Playground.CreateScene(engine, canvas);
-  sceneToRender = scene;
-  engine.runRenderLoop(function () {
-    if (sceneToRender) {
-      sceneToRender.render();
-    }
-  });
+  // Create the scene.
+  game.createScene();
 
-  // Resize
-  window.addEventListener("resize", function () {
-    engine.resize();
-  });
-
+  // Start render loop.
+  game.doRender();
 });
