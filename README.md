@@ -1,3 +1,8 @@
+# add typescript
+
+https://dev.to/aisrael/elixir-phoenix-with-typescript-and-react-december-2019-edition-39l4
+
+
 # BabylonPhoenix
 
 To start your Phoenix server:
