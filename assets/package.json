@@ -7,7 +7,8 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "babylonjs": "^4.1.0",
+    "@babylonjs/core": "^4.1.0",
+    "@babylonjs/loaders": "^4.1.0",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html"
   },

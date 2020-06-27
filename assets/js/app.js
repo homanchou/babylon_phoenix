@@ -22,7 +22,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Create the scene.
   game.createScene();
-
   // Start render loop.
   game.doRender();
 });
