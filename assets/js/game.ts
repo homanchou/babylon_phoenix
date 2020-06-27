@@ -30,7 +30,7 @@ import {
 import "@babylonjs/loaders"
 
 // Required side effects to populate the Create methods on the mesh class. Without this, the bundle would be smaller but the createXXX methods from mesh would not be accessible.
-import "@babylonjs/core/Meshes/meshBuilder";
+// import "@babylonjs/core/Meshes/meshBuilder";
 import "@babylonjs/core/Helpers/sceneHelpers";
 
 export class Game {
