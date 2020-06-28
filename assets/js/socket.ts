@@ -6,7 +6,7 @@
 //
 // Pass the token on params as below. Or remove it
 // from the params if you are not using authentication.
-import { Socket } from "phoenix"
+import { Socket, Channel } from "phoenix"
 
 
 // When you connect, you'll often need to authenticate the client.
@@ -54,7 +54,7 @@ import { Socket } from "phoenix"
 
 export class MySocket {
   public socket: Socket;
-  public channel: any;
+  public channel: Channel;
   constructor() {
     this.socket = new Socket("/socket", {
       params: { token: window['userToken'] }
