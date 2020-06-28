@@ -11,17 +11,24 @@ import "../css/app.scss"
 // Import deps with the dep name or local files with a relative path, for example:
 //
 //     import {Socket} from "phoenix"
-//     import socket from "./socket"
-//
-import "phoenix_html"
-import * as gm from "./game"
+import { MySocket } from "./socket";
 
-window.addEventListener('DOMContentLoaded', () => {
-  // Create the game using the 'renderCanvas'.
-  let game = new gm.Game('renderCanvas');
+const socket = new MySocket();
 
-  // Create the scene.
-  game.createScene();
-  // Start render loop.
-  game.doRender();
+socket.channel.on("new_annotation", (resp) => {
+  console.log("got", resp);
 });
+socket.channel.push("annotation", { "my": "payload" });
+// //
+import "phoenix_html"
+// import * as gm from "./game"
+
+// window.addEventListener('DOMContentLoaded', () => {
+//   // Create the game using the 'renderCanvas'.
+//   let game = new gm.Game('renderCanvas');
+
+//   // Create the scene.
+//   game.createScene();
+//   // Start render loop.
+//   game.doRender();
+// });

@@ -27,7 +27,7 @@ import {
 } from "@babylonjs/core/XR/webXRDefaultExperience";
 
 //import { SceneLoader } from "@babylonjs/core/Loading/sceneLoader";
-import "@babylonjs/loaders"
+import "@babylonjs/loaders/glTF"
 
 // Required side effects to populate the Create methods on the mesh class. Without this, the bundle would be smaller but the createXXX methods from mesh would not be accessible.
 // import "@babylonjs/core/Meshes/meshBuilder";
