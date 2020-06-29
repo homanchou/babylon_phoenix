@@ -25,7 +25,12 @@ defmodule BabylonPhoenixWeb.RoomChannel do
   end
 
   def handle_in("got_clicked", %{"time" => time}, socket) do
-    broadcast!(socket, "received_got_clicked", %{time: time})
+    broadcast_from(socket, "received_got_clicked", %{time: time})
+    {:reply, :ok, socket}
+  end
+
+  def handle_in("camera_position", pos, socket) do
+    broadcast_from(socket, "received_camera_position", pos)
     {:reply, :ok, socket}
   end
 end

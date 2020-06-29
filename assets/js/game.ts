@@ -32,9 +32,11 @@ import "@babylonjs/loaders/glTF"
 // Required side effects to populate the Create methods on the mesh class. Without this, the bundle would be smaller but the createXXX methods from mesh would not be accessible.
 // import "@babylonjs/core/Meshes/meshBuilder";
 import "@babylonjs/core/Helpers/sceneHelpers";
+import { Channel } from "phoenix"
 
 export class Game {
   private _canvas: HTMLCanvasElement;
+  private _channel: Channel;
   private _engine: Engine;
   public _scene?: Scene;
   private _camera?: FreeCamera;
@@ -47,7 +49,8 @@ export class Game {
     this._engine = new Engine(this._canvas, true);
   }
 
-  async createScene() {
+  async createScene(channel: Channel) {
+    this._channel = channel;
     this._scene = new Scene(this._engine);
     this._camera = new FreeCamera("camera1", new Vector3(0, 5, -10), this._scene);
     this._camera.setTarget(Vector3.Zero());
@@ -67,6 +70,24 @@ export class Game {
       }
 
     });
+
+    if (!this._xrHelper.baseExperience) {
+      // no xr support
+      console.log("no xr support")
+    } else {
+      console.log("xr is supported")
+      // all good, ready to go
+    }
+
+    channel.on("received_camera_position", (resp) => {
+      console.log("got recv cam pos", resp);
+    });
+
+    this._scene.onBeforeCameraRenderObservable.add((cam) => {
+      let p = cam.globalPosition;
+      channel.push("camera_position", { x: p.x, y: p.y, z: p.z })
+    })
+
 
     return this._scene;
 

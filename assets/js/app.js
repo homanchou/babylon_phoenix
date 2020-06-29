@@ -26,14 +26,14 @@ import { MyButton } from "./button";
 
 const button = new MyButton(socket.channel);
 
-// import * as gm from "./game"
+import * as gm from "./game"
 
-// window.addEventListener('DOMContentLoaded', () => {
-//   // Create the game using the 'renderCanvas'.
-//   let game = new gm.Game('renderCanvas');
+window.addEventListener('DOMContentLoaded', () => {
+  // Create the game using the 'renderCanvas'.
+  let game = new gm.Game('renderCanvas');
 
-//   // Create the scene.
-//   game.createScene();
-//   // Start render loop.
-//   game.doRender();
-// });
+  // Create the scene.
+  game.createScene(socket.channel);
+  // Start render loop.
+  game.doRender();
+});
