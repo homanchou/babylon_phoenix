@@ -5,6 +5,9 @@ import {
   Scene
 } from "@babylonjs/core/scene";
 import {
+  SceneLoader
+} from "@babylonjs/core/Loading";
+import {
   Vector3
 } from "@babylonjs/core/Maths/math";
 import {
@@ -33,6 +36,7 @@ import "@babylonjs/loaders/glTF"
 // import "@babylonjs/core/Meshes/meshBuilder";
 import "@babylonjs/core/Helpers/sceneHelpers";
 import { Channel } from "phoenix"
+import { GLTF2 } from "@babylonjs/loaders/glTF";
 
 export class Game {
   private _canvas: HTMLCanvasElement;
@@ -51,16 +55,19 @@ export class Game {
 
   async createScene(channel: Channel) {
     this._channel = channel;
+
     this._scene = new Scene(this._engine);
     this._camera = new FreeCamera("camera1", new Vector3(0, 5, -10), this._scene);
     this._camera.setTarget(Vector3.Zero());
     this._camera.attachControl(this._canvas, true);
     this._light = new HemisphericLight("light1", new Vector3(0, 1, 0), this._scene);
     this._light.intensity = 0.3;
-    var sphere = Mesh.CreateSphere("sphere1", 16, 2, this._scene);
-    sphere.position.y = 1;
+    // var sphere = Mesh.CreateSphere("sphere1", 16, 2, this._scene);
+    // sphere.position.y = 1;
 
-    const env = this._scene.createDefaultEnvironment();
+    const env = this._scene.createDefaultEnvironment({
+      createSkybox: false, groundSize: 100
+    });
 
     // here we add XR support
     this._xrHelper = await this._scene.createDefaultXRExperienceAsync({
@@ -71,6 +78,8 @@ export class Game {
 
     });
 
+    // this._xrHelper.baseExperience.camera.pos
+
     if (!this._xrHelper.baseExperience) {
       // no xr support
       console.log("no xr support")
@@ -79,15 +88,20 @@ export class Game {
       // all good, ready to go
     }
 
-    channel.on("received_camera_position", (resp) => {
-      console.log("got recv cam pos", resp);
+    // channel.on("received_camera_position", (resp) => {
+    //   console.log("got recv cam pos", resp);
+    // });
+
+    // this._scene.onBeforeCameraRenderObservable.add((cam) => {
+    //   let p = cam.globalPosition;
+    //   channel.push("camera_position", { x: p.x, y: p.y, z: p.z })
+    // })
+
+    SceneLoader.Append("./gltf/", "backyard2.glb", this._scene, (scene) => {
+      console.log("loaded a scene");
     });
 
-    this._scene.onBeforeCameraRenderObservable.add((cam) => {
-      let p = cam.globalPosition;
-      channel.push("camera_position", { x: p.x, y: p.y, z: p.z })
-    })
-
+    // const xrHelper = await WebXRExperienceHelper.CreateAsync(this._scene);
 
     return this._scene;
 
