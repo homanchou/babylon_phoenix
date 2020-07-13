@@ -66,7 +66,7 @@ export class Game {
     // sphere.position.y = 1;
 
     const env = this._scene.createDefaultEnvironment({
-      createSkybox: false, groundSize: 100
+      groundSize: 300, skyboxSize: 400,
     });
 
     // here we add XR support
@@ -88,20 +88,10 @@ export class Game {
       // all good, ready to go
     }
 
-    // channel.on("received_camera_position", (resp) => {
-    //   console.log("got recv cam pos", resp);
-    // });
-
-    // this._scene.onBeforeCameraRenderObservable.add((cam) => {
-    //   let p = cam.globalPosition;
-    //   channel.push("camera_position", { x: p.x, y: p.y, z: p.z })
-    // })
-
     SceneLoader.Append("./gltf/", "backyard2.glb", this._scene, (scene) => {
       console.log("loaded a scene");
     });
 
-    // const xrHelper = await WebXRExperienceHelper.CreateAsync(this._scene);
 
     return this._scene;
 
