@@ -1,4 +1,9 @@
-info "Building Phoenix static assets"
+#info "Building Phoenix static assets"
 
 #npm run deploy --prefix ./assets
-mix phx.digest
+#mix phx.digest
+
+# app_root/compile
+cd $phoenix_dir
+npm --prefix ./assets run build
+mix "${phoenix_ex}.digest" #use the ${phoenix_ex} variable instead of hardcoding phx or phoenix
