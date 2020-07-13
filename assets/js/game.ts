@@ -88,7 +88,7 @@ export class Game {
       // all good, ready to go
     }
 
-    SceneLoader.Append("./js/", "backyard2.glb", this._scene, (scene) => {
+    SceneLoader.Append("./gltf/", "backyard2.glb", this._scene, (scene) => {
       console.log("loaded a scene");
     });
 
