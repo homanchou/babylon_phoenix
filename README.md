@@ -2,6 +2,8 @@
 
 https://dev.to/aisrael/elixir-phoenix-with-typescript-and-react-december-2019-edition-39l4
 
+Having some trouble loading this on heroku
+
 
 # BabylonPhoenix
 
