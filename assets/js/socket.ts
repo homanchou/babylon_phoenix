@@ -57,7 +57,7 @@ export class MySocket {
   public channel: Channel;
   constructor() {
     this.socket = new Socket("/socket", {
-      params: { token: window['userToken'] }
+      params: { token: window['userToken'], playerId: Math.round(Math.random() * 1000) }
     })
     console.log("in constructor")
     this.socket.connect()
