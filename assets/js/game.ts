@@ -37,6 +37,7 @@ import "@babylonjs/loaders/glTF"
 import "@babylonjs/core/Helpers/sceneHelpers";
 import { Channel } from "phoenix"
 import { GLTF2 } from "@babylonjs/loaders/glTF";
+import { SceneComponentConstants } from "@babylonjs/core/sceneComponent";
 
 export class Game {
   private _canvas: HTMLCanvasElement;
@@ -57,6 +58,31 @@ export class Game {
     this._channel = channel;
 
     this._scene = new Scene(this._engine);
+
+    SceneLoader.Append("./gltf/", "backyard.glb", this._scene, (scene) => {
+      console.log("loaded a scene");
+      const floor = scene.getMeshByName("Backyard Screenshot_1")
+      console.log("floor is", floor)
+      // here we add XR support
+      scene.createDefaultXRExperienceAsync({
+        floorMeshes: [floor],
+        inputOptions: {
+          forceInputProfile: 'oculus-touch-v2'
+        }
+
+      });
+
+      // // this._xrHelper.baseExperience.camera.pos
+
+      // if (!this._xrHelper.baseExperience) {
+      //   // no xr support
+      //   console.log("no xr support")
+      // } else {
+      //   console.log("xr is supported")
+      //   // all good, ready to go
+      // }
+    });
+
     this._camera = new FreeCamera("camera1", new Vector3(0, 5, -10), this._scene);
     this._camera.setTarget(Vector3.Zero());
     this._camera.attachControl(this._canvas, true);
@@ -66,31 +92,11 @@ export class Game {
     // sphere.position.y = 1;
 
     const env = this._scene.createDefaultEnvironment({
-      groundSize: 300, skyboxSize: 400,
+      skyboxSize: 400,
     });
 
-    // here we add XR support
-    this._xrHelper = await this._scene.createDefaultXRExperienceAsync({
-      floorMeshes: [env?.ground as AbstractMesh],
-      inputOptions: {
-        forceInputProfile: 'oculus-touch-v2'
-      }
 
-    });
 
-    // this._xrHelper.baseExperience.camera.pos
-
-    if (!this._xrHelper.baseExperience) {
-      // no xr support
-      console.log("no xr support")
-    } else {
-      console.log("xr is supported")
-      // all good, ready to go
-    }
-
-    SceneLoader.Append("./gltf/", "backyard.glb", this._scene, (scene) => {
-      console.log("loaded a scene");
-    });
 
 
     return this._scene;

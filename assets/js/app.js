@@ -22,9 +22,9 @@ socket.channel.push("annotation", { "my": "payload" });
 // //
 import "phoenix_html"
 
-import { MyButton } from "./button";
+// import { MyButton } from "./button";
 
-const button = new MyButton(socket.channel);
+// const button = new MyButton(socket.channel);
 
 import * as gm from "./game"
 
