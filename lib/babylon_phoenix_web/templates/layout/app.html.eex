@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>BabylonPhoenix · Phoenix Framework</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
 
   </head>
@@ -13,7 +15,13 @@
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
+        <div class="video-grid" id="video">
+          <div class="video-view">
+            <div id="local_stream" class="video-placeholder"></div>
+            <div id="local_video_info" class="video-profile hide"></div>
+            <div id="video_autoplay_local" class="autoplay-fallback hide"></div>
+          </div>
+        </div>
       <%= @inner_content %>
 
 

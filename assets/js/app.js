@@ -29,7 +29,34 @@ import "phoenix_html"
 
 import * as gm from "./game"
 
+function addView(id, show) {
+  if (!$("#" + id)[0]) {
+    $("<div/>", {
+      id: "remote_video_panel_" + id,
+      class: "video-view",
+    }).appendTo("#video");
 
+    $("<div/>", {
+      id: "remote_video_" + id,
+      class: "video-placeholder",
+    }).appendTo("#remote_video_panel_" + id);
+
+    $("<div/>", {
+      id: "remote_video_info_" + id,
+      class: "video-profile " + (show ? "" : "hide"),
+    }).appendTo("#remote_video_panel_" + id);
+
+    $("<div/>", {
+      id: "video_autoplay_" + id,
+      class: "autoplay-fallback hide",
+    }).appendTo("#remote_video_panel_" + id);
+  }
+}
+function removeView(id) {
+  if ($("#remote_video_panel_" + id)[0]) {
+    $("#remote_video_panel_" + id).remove();
+  }
+}
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -37,6 +64,8 @@ window.addEventListener('DOMContentLoaded', () => {
   var uid = window.location.hash;
   if (uid == "") {
     uid = "bob";
+  } else {
+    uid = uid.substr(1);
   }
   //initialize client
   // live - interactive streaming
@@ -87,7 +116,7 @@ window.addEventListener('DOMContentLoaded', () => {
       var remoteStream = evt.stream;
       var id = remoteStream.getId();
       // Add a view for the remote stream.
-      //addView(id);
+      addView(id);
       // Play the remote stream.
       remoteStream.play("remote_video_" + id);
       console.log('stream-subscribed remote-uid: ', id);
@@ -99,7 +128,7 @@ window.addEventListener('DOMContentLoaded', () => {
       // Stop playing the remote stream.
       remoteStream.stop("remote_stream_" + id);
       // Remove the view of the remote stream.
-      //removeView(id);
+      removeView(id);
       console.log("stream-removed remote-uid: ", id);
     });
 
