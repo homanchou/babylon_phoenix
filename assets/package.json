@@ -9,6 +9,8 @@
   "dependencies": {
     "@babylonjs/core": "^4.1.0",
     "@babylonjs/loaders": "^4.1.0",
+    "@types/agora-rtc-sdk": "^3.1.0",
+    "agora-rtc-sdk": "^3.1.2",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html"
   },
