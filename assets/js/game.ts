@@ -69,8 +69,19 @@ export class Game {
         inputOptions: {
           forceInputProfile: 'oculus-touch-v2'
         }
+      }).then((exp) => {
+        exp.input.onControllerAddedObservable.add((inputSource) => {
+          inputSource.onMeshLoadedObservable.add((mesh) => {
+            mesh.onAfterWorldMatrixUpdateObservable.add((me) => {
+              console.log(me.id, me.absolutePosition, me.absoluteRotationQuaternion)
+            })
+          });
+        });
+        exp.baseExperience.camera.onViewMatrixChangedObservable.add((cam) => {
+          console.log("cam", cam.position, cam.absoluteRotation)
+        })
 
-      });
+      })
 
       // // this._xrHelper.baseExperience.camera.pos
 
@@ -94,6 +105,7 @@ export class Game {
     const env = this._scene.createDefaultEnvironment({
       skyboxSize: 400,
     });
+
 
 
 

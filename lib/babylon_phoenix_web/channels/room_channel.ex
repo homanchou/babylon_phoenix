@@ -33,4 +33,9 @@ defmodule BabylonPhoenixWeb.RoomChannel do
     broadcast_from(socket, "received_camera_position", pos)
     {:reply, :ok, socket}
   end
+
+  def handle_in("camera_change", params, socket) do
+    broadcast_from(socket, "received_camera_change", params)
+    {:reply, :ok, socket}
+  end
 end
