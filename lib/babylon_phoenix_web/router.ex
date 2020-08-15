@@ -7,13 +7,8 @@ defmodule BabylonPhoenixWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug BabylonPhoenixWeb.Auth
   end
-
-  # pipeline :static do
-  #   plug Plug.Static,
-  #     at: "/static",
-  #     from: {:babylon_phoenix, "priv/test"}
-  # end
 
   pipeline :api do
     plug :accepts, ["json"]
@@ -22,12 +17,9 @@ defmodule BabylonPhoenixWeb.Router do
   scope "/", BabylonPhoenixWeb do
     pipe_through :browser
 
-    # scope "/static" do
-    #   pipe_through :static
-    #   get "/*path", PageController, :index
-    # end
-
+    resources "/users", UserController
     get "/", PageController, :index
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
   end
 
   # Other scopes may use custom stacks.

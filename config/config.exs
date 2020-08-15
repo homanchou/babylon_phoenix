@@ -8,7 +8,8 @@
 use Mix.Config
 
 config :babylon_phoenix,
-  ecto_repos: [BabylonPhoenix.Repo]
+  ecto_repos: [BabylonPhoenix.Repo],
+  generators: [binary_id: true]
 
 # Configures the endpoint
 config :babylon_phoenix, BabylonPhoenixWeb.Endpoint,
