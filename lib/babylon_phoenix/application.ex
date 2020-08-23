@@ -14,7 +14,9 @@ defmodule BabylonPhoenix.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: BabylonPhoenix.PubSub},
       # Start the Endpoint (http/https)
-      BabylonPhoenixWeb.Endpoint
+      BabylonPhoenixWeb.Endpoint,
+      # Use registry
+      {Registry, keys: :unique, name: BabylonPhoenix.RoomRegistry}
       # Start a worker by calling: BabylonPhoenix.Worker.start_link(arg)
       # {BabylonPhoenix.Worker, arg}
     ]
