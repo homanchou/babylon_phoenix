@@ -1,34 +1,43 @@
 defmodule BabylonPhoenixWeb.RoomController do
   use BabylonPhoenixWeb, :controller
 
-  alias BabylonPhoenix.Game
-  alias BabylonPhoenix.Game.Room
+  alias BabylonPhoenix.{Game, RoomServer, RoomSupervisor}
+  # alias BabylonPhoenix.Game.Room
+  alias BabylonPhoenix.Util
 
   # def index(conn, _params) do
   #   rooms = Game.list_rooms()
   #   render(conn, "index.html", rooms: rooms)
   # end
 
-  # def new(conn, _params) do
-  #   changeset = Game.change_room(%Room{})
-  #   render(conn, "new.html", changeset: changeset)
-  # end
+  def new(conn, _params) do
+    # changeset = Game.change_room(%Room{})
+    render(conn, "new.html")
+  end
 
-  def create(conn, %{"room" => room_params}) do
-    case Game.create_room(room_params) do
-      {:ok, room} ->
-        conn
-        |> put_flash(:info, "Room created successfully.")
-        |> redirect(to: Routes.room_path(conn, :show, room))
+  def create(conn, _params) do
+    random_id = Util.random_id(5)
 
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+    if RoomServer.room_pid(random_id) == nil do
+      RoomSupervisor.create_room(random_id)
     end
+
+    conn |> redirect(to: Routes.room_path(conn, :show, random_id))
+
+    # case Game.create_room(room_params) do
+    #   {:ok, room} ->
+    #     conn
+    #     |> put_flash(:info, "Room created successfully.")
+    #     |> redirect(to: Routes.room_path(conn, :show, room))
+
+    #   {:error, %Ecto.Changeset{} = changeset} ->
+    #     render(conn, "new.html", changeset: changeset)
+    # end
   end
 
   def show(conn, %{"id" => id}) do
-    room = Game.get_room!(id)
-    render(conn, "show.html", room: room)
+    # room = Game.get_room!(id)
+    render(conn, "show.html")
   end
 
   # def edit(conn, %{"id" => id}) do

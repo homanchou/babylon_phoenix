@@ -16,7 +16,8 @@ defmodule BabylonPhoenix.Application do
       # Start the Endpoint (http/https)
       BabylonPhoenixWeb.Endpoint,
       # Use registry
-      {Registry, keys: :unique, name: BabylonPhoenix.RoomRegistry}
+      {Registry, keys: :unique, name: BabylonPhoenix.RoomRegistry},
+      BabylonPhoenix.RoomSupervisor
       # Start a worker by calling: BabylonPhoenix.Worker.start_link(arg)
       # {BabylonPhoenix.Worker, arg}
     ]

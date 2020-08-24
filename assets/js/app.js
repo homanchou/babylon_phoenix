@@ -31,14 +31,17 @@ import * as gm from "./game"
 //import * as webcall from "./agora"
 
 window.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('renderCanvas')) {
 
-  //new webcall.MyWebCall();
+    //new webcall.MyWebCall();
 
-  // Create the game using the 'renderCanvas'.
-  let game = new gm.Game('renderCanvas');
+    // Create the game using the 'renderCanvas'.
+    let game = new gm.Game('renderCanvas');
 
-  // Create the scene.
-  game.createScene(socket.channel);
-  // Start render loop.
-  game.doRender();
+    // Create the scene.
+    game.createScene(socket.channel);
+    // Start render loop.
+    game.doRender();
+  }
+
 });

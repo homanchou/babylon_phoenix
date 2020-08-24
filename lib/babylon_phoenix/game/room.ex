@@ -3,6 +3,10 @@ defmodule BabylonPhoenix.Game.Room do
   alias BabylonPhoenix.Game.Room
   alias BabylonPhoenix.Game.Player
 
+  def new() do
+    %Room{}
+  end
+
   def player_joined(room = %Room{}, username) do
     {_, new_players} =
       Map.get_and_update(room.players, username, fn value ->

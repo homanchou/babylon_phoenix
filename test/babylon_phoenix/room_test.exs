@@ -1,10 +1,10 @@
-defmodule BabylonPhoenix.GameTest do
+defmodule BabylonPhoenix.RoomTest do
   use BabylonPhoenix.DataCase
 
   alias BabylonPhoenix.Game.Room
 
   test "join a game" do
-    room = %Room{}
+    room = Room.new()
     room = Room.player_joined(room, "tom")
     room = Room.player_joined(room, "tom")
 
@@ -12,7 +12,7 @@ defmodule BabylonPhoenix.GameTest do
   end
 
   test "exit a game" do
-    room = %Room{}
+    room = Room.new()
     room = Room.player_joined(room, "tom")
     room = Room.player_left(room, "tom")
     assert room.players == %{}

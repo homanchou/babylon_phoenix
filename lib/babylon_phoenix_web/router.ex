@@ -16,7 +16,7 @@ defmodule BabylonPhoenixWeb.Router do
 
   scope "/", BabylonPhoenixWeb do
     pipe_through :browser
-    resources "/rooms", RoomController, only: [:create, :show]
+    resources "/rooms", RoomController, only: [:new, :create, :show]
     resources "/users", UserController
     get "/", PageController, :index
     resources "/sessions", SessionController, only: [:new, :create, :delete]
