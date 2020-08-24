@@ -36,8 +36,13 @@ defmodule BabylonPhoenixWeb.RoomController do
   end
 
   def show(conn, %{"id" => id}) do
-    # room = Game.get_room!(id)
-    render(conn, "show.html")
+    if RoomServer.room_pid(id) == nil do
+      conn
+      |> put_flash(:error, "That room does not appear to be accessible now")
+      |> redirect(to: Routes.page_path(conn, :index))
+    else
+      render(conn, "show.html")
+    end
   end
 
   # def edit(conn, %{"id" => id}) do

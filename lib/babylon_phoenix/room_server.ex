@@ -2,8 +2,8 @@ defmodule BabylonPhoenix.RoomServer do
   @moduledoc """
   A game server process that holds a `Game` struct as its state.
   """
-  alias BabylonPhoenix.Util
-  alias BabylonPhoenix.Room
+  # alias BabylonPhoenix.Util
+  alias BabylonPhoenix.Game.Room
   use GenServer
   require Logger
 
