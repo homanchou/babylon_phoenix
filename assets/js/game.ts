@@ -59,7 +59,7 @@ export class Game {
 
     this._scene = new Scene(this._engine);
 
-    SceneLoader.Append("./gltf/", "backyard.glb", this._scene, (scene) => {
+    SceneLoader.Append("/gltf/", "backyard.glb", this._scene, (scene) => {
       console.log("loaded a scene");
       const floor = scene.getMeshByName("Backyard Screenshot_1")
       console.log("floor is", floor)
