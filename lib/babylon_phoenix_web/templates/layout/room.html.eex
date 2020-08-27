@@ -4,38 +4,29 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>VR Rooms</title>
+    <title>VR Room</title>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
 
 
   </head>
   <body id="body">
 
-      <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <%= if @current_user do %>
-              <li><%= @current_user.username %></li>
-              <li>
-                <%= link "Log out", to: Routes.session_path(@conn, :delete, @current_user), method: "delete" %>
-              </li>
-            <% else %>
-              <li><%= link "Register", to: Routes.user_path(@conn, :new) %></li>
-              <li><%= link "Log in", to: Routes.session_path(@conn, :new) %></li>
-            <% end %>
-          </ul>
-        </nav>
-        <h1>VR Rooms</h1>
-      </section>
-    </header
+
 
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
+        <div class="video-grid" id="video">
+          <div class="video-view">
+            <div id="local_stream" class="video-placeholder"></div>
+            <div id="local_video_info" class="video-profile hide"></div>
+            <div id="video_autoplay_local" class="autoplay-fallback hide"></div>
+          </div>
+        </div>
       <%= @inner_content %>
+
 
     </main>
 

@@ -1,2 +1,2 @@
-<h2>Room</h2>
+
 <canvas id="renderCanvas" touch-action="none"></canvas>

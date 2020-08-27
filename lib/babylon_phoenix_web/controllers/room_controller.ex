@@ -1,7 +1,8 @@
 defmodule BabylonPhoenixWeb.RoomController do
   use BabylonPhoenixWeb, :controller
+  plug :put_layout, "room.html"
 
-  alias BabylonPhoenix.{Game, RoomServer, RoomSupervisor}
+  alias BabylonPhoenix.{RoomServer, RoomSupervisor}
   # alias BabylonPhoenix.Game.Room
   alias BabylonPhoenix.Util
 
